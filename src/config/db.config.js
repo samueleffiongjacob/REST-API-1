@@ -8,8 +8,8 @@ const conections = mysql.createConnection({
 });
 
 conections.connect(function (err) {
-  // if (err) throw err; //this did not run still i remove this
-  if (err);
+  if (err) throw err; //this did not run still i remove this
+  // if (err);
   // the above is  what is working for me
   console.log("Connected!");
 });
