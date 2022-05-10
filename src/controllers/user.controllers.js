@@ -2,7 +2,7 @@ const User = require("../models/user.models");
 
 // Create and Save a new User.
 
-exports.Create = (req, res) => {
+exports.create = (req, res) => {
   //validate request
   if (!req.body) {
     res.status(400).send({
@@ -88,7 +88,7 @@ exports.update = (req, res) => {
 
 // Delete a user with a specified Id in the request
 exports.delete = (req, res) => {
-  User.deleteById(Number(req.params.id), (err, data) => {
+  User.delete(Number(req.params.id), (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

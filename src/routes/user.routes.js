@@ -4,7 +4,7 @@ const userController = require("../controllers/user.controllers");
 
 module.exports = (app) => {
   // Create A New User
-  router.post("/", userController.Create);
+  router.post("/", userController.create);
 
   // Retrieve All Users
   router.get("/", userController.findAll);
@@ -20,4 +20,12 @@ module.exports = (app) => {
 
   app.use("/api/users", router);
   //response on insonia // Cannot GET /api/users
+
+  // error handler
+  app.use((err, req, res, next) => {
+    res.status(err.statusCode || 500).send({
+      message: err.message,
+    });
+    next();
+  });
 };

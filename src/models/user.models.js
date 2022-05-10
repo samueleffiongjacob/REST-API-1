@@ -8,13 +8,13 @@ class User {
     this.phone_number = phone_number;
   }
 
-  static Create(newUser, result) {
+  static create(newUser, result) {
     db.query(
       `INSERT INTO users VALUES (?, ?, ?)`,
       [newUser.id, newUser.email, newUser.phone_number],
       (err, res) => {
         if (err) {
-          console.log("error :", error);
+          console.log("error :", err);
           result(err, null);
           return;
         }
@@ -28,7 +28,7 @@ class User {
   static findById(id, result) {
     db.query(`SELECT * FROM users WHERE id = ?`, [id], (err, res) => {
       if (err) {
-        console.log("error :", error);
+        console.log("error :", err);
         result(err, null);
         return;
       }
@@ -46,10 +46,10 @@ class User {
   }
 
   static getAll(result) {
-    db.query(`SELECT * FROM users WHERE`, (err, res) => {
+    db.query("SELECT * FROM users ", (err, res) => {
       if (err) {
         console.log("error :", err);
-        result(err, null);
+        result(null, err);
         return;
       }
 
@@ -60,13 +60,13 @@ class User {
 
   static updateById(id, user, result) {
     db.query(
-      `UPDATE users SET id = ?, email=?, phone_number=? WHERE id =?`,
+      "UPDATE users SET id = ?, email=?, phone_number=? WHERE id =?",
       [user.id, user.email, user.phone_number, id],
 
       (err, res) => {
         if (err) {
           console.log("error :", err);
-          result(err, null);
+          result(null, err);
           return;
         }
 
@@ -84,7 +84,7 @@ class User {
   }
 
   static delete(id, result) {
-    db.query(`DELETE FROM user WHERE address = ?`, id, (err, res) => {
+    db.query("DELETE FROM user WHERE address = ?", id, (err, res) => {
       if (err) {
         console.log("error :", err);
         result(err, null);
